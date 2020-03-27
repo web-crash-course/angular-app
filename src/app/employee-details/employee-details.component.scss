@@ -9,3 +9,8 @@ form {
 form input {
   margin-bottom: 10px;
 }
+
+form input.ng-invalid  {
+  outline: none;
+  border: red 1px solid;
+}
