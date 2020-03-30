@@ -18,8 +18,8 @@ export class EmployeeDetailsComponent {
 
   save() {
     if (this.employeeForm.valid) {
-      const firstName = this.employeeForm.get('firstName');
-      const lastName = this.employeeForm.get('lastName');
+      const firstName = this.employeeForm.get('firstName').value;
+      const lastName = this.employeeForm.get('lastName').value;
       console.log({firstName, lastName});
     } else {
       console.error('Input values wrong...');
