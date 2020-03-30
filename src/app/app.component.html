@@ -1,1 +1,3 @@
-<app-employee-details></app-employee-details>
+<app-employee-details [employee]="employee"
+                      (employeeChange)="employeeToSave = $event"></app-employee-details>
+<p>Employee to save: {{employeeToSave | json}}</p>

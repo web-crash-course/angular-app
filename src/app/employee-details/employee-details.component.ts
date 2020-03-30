@@ -1,5 +1,10 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+
+export interface Employee {
+  firstName: string;
+  lastName: string;
+}
 
 @Component({
   selector: 'app-employee-details',
@@ -7,6 +12,14 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./employee-details.component.scss']
 })
 export class EmployeeDetailsComponent {
+  @Input()
+  set employee(employee: Employee) {
+    this.employeeForm.setValue(employee);
+  }
+
+  @Output()
+  employeeChange = new EventEmitter<Employee>();
+
   employeeForm: FormGroup;
 
   constructor() {
@@ -18,11 +31,9 @@ export class EmployeeDetailsComponent {
 
   save() {
     if (this.employeeForm.valid) {
-      const firstName = this.employeeForm.get('firstName');
-      const lastName = this.employeeForm.get('lastName');
-      console.log({firstName, lastName});
-    } else {
-      console.error('Input values wrong...');
+      const firstName = this.employeeForm.get('firstName').value;
+      const lastName = this.employeeForm.get('lastName').value;
+      this.employeeChange.emit({firstName, lastName});
     }
   }
 }
